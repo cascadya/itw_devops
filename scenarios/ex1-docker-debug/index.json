@@ -1,32 +1,25 @@
 {
   "title": "Ex1 — Debug Dockerfile: healthz",
   "description": "Corriger une image Docker pour servir /healthz (200)",
+  "backend": { "imageid": "ubuntu" },
+  "environment": { "uilayout": "terminal" },
   "details": {
+    "intro": { "text": "intro.md" },
     "steps": [
-      {
-        "title": "1) Prise en main",
-        "text": "step1.md"
-      },
-      {
-        "title": "2) Corriger le Dockerfile",
-        "text": "step2.md"
-      },
-      {
-        "title": "3) Vérifier & expliquer",
-        "text": "step3.md"
-      }
+      { "title": "1) Prise en main", "text": "step1.md" },
+      { "title": "2) Corriger le Dockerfile", "text": "step2.md" },
+      { "title": "3) Vérifier & expliquer", "text": "step3.md" }
     ],
-    "intro": {
-      "text": "intro.md"
-    },
-    "finish": {
-      "text": "finish.md"
-    }
+    "finish": { "text": "finish.md" }
   },
-  "backend": {
-    "imageid": "ubuntu"
-  },
-  "environment": {
-    "uilayout": "terminal"
+  "assets": {
+    "host01": [
+      { "file": "env-init.sh", "target": "/root/ex1/env-init.sh" },
+      { "file": "foreground.sh", "target": "/root/ex1/foreground.sh" },
+      { "file": "verify.sh", "target": "/root/ex1/verify.sh" },
+      { "file": "assets/Dockerfile", "target": "/root/ex1/assets/Dockerfile" },
+      { "file": "assets/app/package.json", "target": "/root/ex1/assets/app/package.json" },
+      { "file": "assets/app/server.js", "target": "/root/ex1/assets/app/server.js" }
+    ]
   }
 }
