@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
-# SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-# bash "${SCRIPT_DIR}/env-init.sh"
-# L'appel au script d'initialisation est mieux géré par Killercoda directement.
-# On va le lancer via la section "intro" du index.json.
+printf "✅ Environnement prêt.\n"
+printf "Les fichiers pour l'exercice ont été copiés dans /root/ex1\n\n"
+printf "Voici l'arborescence :\n"
 
-# Message pour l'utilisateur
-printf "\n✅ Environnement prêt. Les fichiers de l'exercice se trouvent dans /root/ex1\n"
-printf "Voici l'arborescence des fichiers :\n"
-
-# La commande 'tree' est parfaite pour vérifier que les assets ont bien été copiés.
+# À ce stade, 'tree' doit exister car env-init.sh (lancé par courseData) a déjà terminé son exécution.
 tree /root/ex1
