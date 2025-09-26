@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-# Exécute le script d'initialisation
-env-init.sh
-
-# Créer le répertoire de travail pour l'utilisateur
-mkdir -p /root/ex1/app
-
-# Message pour l'utilisateur
-printf "\n✅ Environnement prêt. Les fichiers de l'exercice se trouvent dans /root/ex1\n"
+printf "✅ Environnement prêt.\n"
+printf "Les fichiers pour l'exercice ont été copiés dans /root/ex1\n\n"
 printf "Voici l'arborescence :\n"
+
+# À ce stade, 'tree' doit exister car env-init.sh (lancé par courseData) a déjà terminé son exécution.
 tree /root/ex1
