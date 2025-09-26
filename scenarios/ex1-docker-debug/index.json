@@ -4,7 +4,11 @@
   "backend": { "imageid": "ubuntu" },
   "environment": { "uilayout": "terminal" },
   "details": {
-    "intro": { "text": "intro.md", "courseData": "foreground.sh" },
+        "intro": { 
+      "text": "intro.md",
+      "courseData": "env-init.sh",
+      "code": "foreground.sh"
+    },
     "steps": [
       { "title": "1) Prise en main", "text": "step1.md" },
       { "title": "2) Corriger le Dockerfile", "text": "step2.md" },
