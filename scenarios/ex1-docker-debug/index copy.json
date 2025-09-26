@@ -4,7 +4,7 @@
   "backend": { "imageid": "ubuntu" },
   "environment": { "uilayout": "terminal" },
   "details": {
-    "intro": { "text": "intro.md", "courseData": "foreground.sh" },
+    "intro": { "text": "intro.md" },
     "steps": [
       { "title": "1) Prise en main", "text": "step1.md" },
       { "title": "2) Corriger le Dockerfile", "text": "step2.md" },
@@ -14,11 +14,12 @@
   },
   "assets": {
     "host01": [
-      { "file": "env-init.sh", "target": "/usr/local/bin/", "chmod": "+x" },
-      { "file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x" },
-      { "file": "assets/Dockerfile", "target": "/root/ex1/" },
-      { "file": "assets/app/package.json", "target": "/root/ex1/app/" },
-      { "file": "assets/app/server.js", "target": "/root/ex1/app/" }
+      { "file": "env-init.sh", "target": "/root/ex1/env-init.sh" },
+      { "file": "foreground.sh", "target": "/root/ex1/foreground.sh" },
+      { "file": "verify.sh", "target": "/root/ex1/verify.sh" },
+      { "file": "assets/Dockerfile", "target": "/root/ex1/assets/Dockerfile" },
+      { "file": "assets/app/package.json", "target": "/root/ex1/assets/app/package.json" },
+      { "file": "assets/app/server.js", "target": "/root/ex1/assets/app/server.js" }
     ]
   }
 }
