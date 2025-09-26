@@ -1,0 +1,25 @@
+{
+  "title": "Lancer votre premier conteneur Docker",
+  "description": "Un scénario simple pour apprendre à lancer un conteneur Docker de base avec l'image hello-world.",
+  "difficulty": "beginner",
+  "time": "2m",
+  "steps": [
+    {
+      "title": "Étape 1 : Vérifier la version de Docker",
+      "text": "index-step1.md"
+    },
+    {
+      "title": "Étape 2 : Lancer le conteneur 'hello-world'",
+      "text": "index-step2.md"
+    }
+  ],
+  "assets": {
+    "host01": [
+      {"file": "index-step1.md", "target": "/root"},
+      {"file": "index-step2.md", "target": "/root"}
+    ]
+  },
+  "backend": {
+    "imageid": "ubuntu:2004"
+  }
+}
