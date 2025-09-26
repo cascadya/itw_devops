@@ -13,4 +13,4 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -y >/dev/null
 apt-get install -y docker.io curl tree >/dev/null
 
-echo "[init] Setup complete. Environment is ready."
+echo "[init] Done. Environment is ready."
