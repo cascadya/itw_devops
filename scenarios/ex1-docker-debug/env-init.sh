@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
+# Redirige TOUTE la sortie (stdout et stderr) de ce script vers un fichier log
+exec > /root/init.log 2>&1
+
 set -euo pipefail
 
-echo "[init] Starting full environment setup..."
+echo "[DEBUG] env-init.sh a démarré."
+date
 
-# 1. Créer la structure de dossiers nécessaire
-echo "[init] Creating workspace directory /root/ex1/app..."
+echo "[DEBUG] Étape 1: Création des dossiers..."
 mkdir -p /root/ex1/app
+echo "[DEBUG] Dossiers créés."
 
-# 2. Installer les dépendances
-echo "[init] Installing dependencies (docker, curl, tree)..."
+echo "[DEBUG] Étape 2: Installation des dépendances (apt-get)..."
 export DEBIAN_FRONTEND=noninteractive
-apt-get update -y >/dev/null
-apt-get install -y docker.io curl tree >/dev/null
+apt-get update -y
+apt-get install -y docker.io curl tree
+echo "[DEBUG] Dépendances installées."
 
-# 3. Créer les fichiers de l'exercice directement ici
-echo "[init] Creating exercise files..."
-
-# Dockerfile cassé
+echo "[DEBUG] Étape 3: Création des fichiers..."
 cat > /root/ex1/Dockerfile <<'EOF'
 FROM node:18-alpine
 # Problèmes : mauvais ordre des copies, install avant package.json, mauvaise CMD
@@ -25,8 +26,8 @@ COPY . .
 RUN npm install --production
 CMD ["npm", "run", "serve"]
 EOF
+echo "[DEBUG] Dockerfile créé."
 
-# App Node - package.json
 cat > /root/ex1/app/package.json <<'EOF'
 {
   "name": "healthz-app",
@@ -41,8 +42,8 @@ cat > /root/ex1/app/package.json <<'EOF'
   "type": "module"
 }
 EOF
+echo "[DEBUG] package.json créé."
 
-# App Node - server.js
 cat > /root/ex1/app/server.js <<'EOF'
 import express from 'express'
 const app = express()
@@ -50,5 +51,7 @@ const PORT = process.env.PORT || 3000
 app.get('/healthz', (_req, res) => res.status(200).json({ status: 'ok' }))
 app.listen(PORT, '0.0.0.0', () => console.log(`listening on ${PORT}`))
 EOF
+echo "[DEBUG] server.js créé."
 
-echo "[init] Setup complete. Environment is ready."
+echo "[DEBUG] env-init.sh a terminé avec succès."
+date

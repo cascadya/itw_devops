@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
-printf "✅ Environnement prêt.\n"
-printf "Les fichiers pour l'exercice ont été copiés dans /root/ex1\n\n"
-printf "Voici l'arborescence :\n"
+echo "--- Début du script foreground.sh ---"
 
-# À ce stade, 'tree' doit exister car env-init.sh (lancé par courseData) a déjà terminé son exécution.
+if [ -f /root/init.log ]; then
+  echo ">>> Le fichier de log /root/init.log a été trouvé. Voici son contenu :"
+  cat /root/init.log
+else
+  echo ">>> ERREUR : Le script env-init.sh n'a PAS démarré, le fichier /root/init.log est introuvable."
+fi
+
+echo "--- Fin du log. Tentative de vérification de l'environnement ---"
+
+# On retente la commande tree pour voir si elle a été installée
 tree /root/ex1
