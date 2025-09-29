@@ -17,10 +17,6 @@
     "finish": { "text": "finish.md" }
   },
   "assets": {
-    "host01": [
-      { "file": "assets/Dockerfile", "target": "/root/ex1/" },
-      { "file": "assets/app/package.json", "target": "/root/ex1/app/" },
-      { "file": "assets/app/server.js", "target": "/root/ex1/app/" }
-    ]
+    "host01": []
   }
 }
