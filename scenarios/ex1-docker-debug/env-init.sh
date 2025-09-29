@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Redirige TOUTE la sortie (stdout et stderr) de ce script vers un fichier log
 exec > /root/init.log 2>&1
 
+# On active le mode strict, MAIS on va le désactiver localement pour la commande qui échoue
 set -euo pipefail
 
 echo "[DEBUG] env-init.sh a démarré."
@@ -14,27 +14,37 @@ echo "[DEBUG] Dossiers créés."
 echo "[DEBUG] Étape 2: Installation des dépendances (apt-get)..."
 export DEBIAN_FRONTEND=noninteractive
 
-echo "[DEBUG] Lancement de apt-get update..."
+# --- BLOC DE DIAGNOSTIC POUR APT-GET UPDATE ---
+echo "[DIAG] Désactivation temporaire du mode 'exit on error'..."
+set +e
+
+echo "[DIAG] Exécution de 'apt-get update -y'..."
 apt-get update -y
-echo "[DEBUG] apt-get update terminé."
+# On capture le code de sortie de la commande précédente
+EXIT_CODE=$?
 
-# On installe les paquets un par un pour isoler le coupable
-echo "[DEBUG] Installation de 'curl'..."
+echo "[DIAG] Réactivation du mode 'exit on error'..."
+set -e
+
+echo "[DIAG] La commande 'apt-get update -y' a terminé avec le code de sortie : $EXIT_CODE"
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo "[ERREUR] apt-get update a échoué. Le script ne peut pas continuer."
+  # On arrête volontairement le script ici, mais après avoir écrit dans le log.
+  exit 1
+fi
+# --- FIN DU BLOC DE DIAGNOSTIC ---
+
+
+echo "[DEBUG] Installation des paquets un par un..."
 apt-get install -y curl
-echo "[DEBUG] 'curl' installé."
-
-echo "[DEBUG] Installation de 'tree'..."
 apt-get install -y tree
-echo "[DEBUG] 'tree' installé."
-
-echo "[DEBUG] Installation de 'docker.io'..."
 apt-get install -y docker.io
-echo "[DEBUG] 'docker.io' installé."
-
-echo "[DEBUG] Toutes les dépendances sont installées."
+echo "[DEBUG] Dépendances installées."
 
 
 echo "[DEBUG] Étape 3: Création des fichiers..."
+# ... (le reste du script avec les 'cat > ... <<EOF' reste identique) ...
 cat > /root/ex1/Dockerfile <<'EOF'
 FROM node:18-alpine
 WORKDIR /usr/src/app
@@ -60,7 +70,6 @@ app.get('/healthz', (_req, res) => res.status(200).json({ status: 'ok' }))
 app.listen(PORT, '0.0.0.0', () => console.log(`listening on ${PORT}`))
 EOF
 echo "[DEBUG] Fichiers créés."
-
 
 echo "[DEBUG] env-init.sh a terminé avec succès."
 date
